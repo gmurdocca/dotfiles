@@ -1,0 +1,51 @@
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+#merged mkdir/cd
+function mkcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"; }
+
+alias ls='ls --color=auto'
+alias sl='sl -e'
+alias tmux-join="tmux new-session -t"
+alias t="tmux attach"
+alias v='vim'
+alias ll='ls --color=auto -la'
+alias d='cd ~/development'
+
+# Editor:
+export EDITOR=vim
+export PSQL_EDITOR='vim -c "set ft=sql"'
+
+# Prompt
+DEFAULT="[0;0m"
+PINK="[0;35m"
+GREEN="[0;32m"
+YELLOW="[0;33m"
+BLDCYAN="[1;36m"
+
+export PS1='\n\e${PINK}\u\e${BLDCYAN}@\e${DEFAULT}\e${YELLOW}\h \
+\e${DEFAULT}in \e${GREEN}\w\
+\e${DEFAULT}\n$ '
+
+# Disable Ctrl-S
+stty stop undef
+
+# Make ~/.bash_history unbounded in size (from: http://mywiki.wooledge.org/BashFAQ/088)
+unset HISTFILESIZE
+export HISTSIZE=10000
+export PROMPT_COMMAND="history -a"
+
+# Don't write lines starting with a space or repeat entries to the history
+export HISTCONTROL=ignoredups:ignorespace
+
+type shopt >/dev/null 2>&1 && shopt -s histappend
+
+# Include a host-specific config
+[ -f ~/.bash_host ] && . ~/.bash_host
+
+# Get pretty ls colours
+eval `dircolors ~/.dircolors`
+
+# Necessary sudo aliases
+alias please='sudo'
+alias sorry='sudo $( history -p "!!" )'

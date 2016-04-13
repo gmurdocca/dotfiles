@@ -1,0 +1,16 @@
+Config { font = "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-u"
+       , bgColor = "#333333"
+       , fgColor = "#FFFFFF"
+       , position = Top 
+       , lowerOnStart = True
+       , commands = [ Run Network "eth0" ["-L", "8", "-H", "32", "-l", "#FFFFFF", "-n", "#FFFFFF" ,"-h", "#FFFFFF", "-t", "<dev>: <rx> : <tx>"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","#5CD94E","--high","#A36666"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+    		    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run StdinReader
+                    , Run Weather "YMML" ["-t","Melbourne: <tempC>","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 18000
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %StdinReader% }{ %YMML% <fc=#5CD94E>|</fc> %cpu% <fc=#5CD94E>|</fc> %memory% <fc=#5CD94E>|</fc> %eth0% <fc=#5CD94E>|</fc> %date%"
+       }

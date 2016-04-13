@@ -1,0 +1,17 @@
+[user]
+    name = George Murdocca
+    email = george@murdocca.com.au
+[diff]
+    tool = vimdiff
+[alias]
+    st = status
+    compactlog = log --stat --pretty=format:"%h%x09%an%x09%ad%x09%s"
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit
+[log]
+    date = local
+[color]
+    ui = auto
+[url "https://"]
+	insteadOf = git://
+[push]
+	default = simple

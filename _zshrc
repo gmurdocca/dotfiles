@@ -1,0 +1,35 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle :compinstall filename '~/.zshrc'
+zstyle ':completion::complete:*' use-cache 1
+zmodload zsh/complist
+
+# Nice menu for for commands that use PID for an argument (e.g. 'kill')
+zstyle ':completion:*:*:*:*:processes' menu yes select
+zstyle ':completion:*:*:*:*:processes' force-list always
+
+autoload -Uz compinit && compinit
+autoload -U colors && colors
+
+setopt inc_append_history
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=100000
+
+. ~/.bash_profile
+. ~/.zsh_functions
+unset PS1 # unset the bash prompt
+
+bindkey -e # use emacs key bindings
+autoload -U select-word-style
+select-word-style bash
+setopt prompt_subst
+export PROMPT='%{$fg[magenta]%}%n%{$fg[cyan]%}@%{$fg[yellow]%}%m%{$reset_color%} %{$fg[green]%}$(disambiguate-keeplast)%{$reset_color%} • '
+export PS1="$PROMPT"
+
+# use the standard bash bindings for jumping to characters
+bindkey '^]' 'vi-find-next-char'
+bindkey '^[^]' 'vi-find-prev-char'

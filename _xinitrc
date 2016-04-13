@@ -1,0 +1,10 @@
+xsetroot -solid black &
+xsetroot -cursor_name left_ptr &
+xbindkeys &
+feh --bg-scale ~/.wallpaper.png &
+
+eval $(gnome-keyring-daemon --start)
+export GNOME_KEYRING_SOCKET
+export GNOME_KEYRING_PID
+
+exec ck-launch-session xmonad
