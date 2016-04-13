@@ -1,5 +1,7 @@
 #!/bin/bash
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+echo $CHECKOUT_DIR
+exit
 FILES="bash_profile tmux.conf vim vimrc zshrc zsh_functions gitconfig psqlrc ipython matplotlib"
 
 read -p "Are you sure you want to clobber all your config files? (y/n)" -n 1
@@ -26,13 +28,14 @@ done
 # Link .bashrc to .bash_profile
 symlink "$CHECKOUT_DIR/_bash_profile" ".bashrc"
 
-# fish
-mkdir -p ".config"
-symlink "$CHECKOUT_DIR/fish" ".config/fish"
-
 # terminator 
 mkdir -p ".config/terminator"
-symlink "CHECKOUT_DIR/_terminator" ".config/terminator/config"
+symlink "$CHECKOUT_DIR/_terminator" ".config/terminator/config"
 
 # Link the dircolors checkout
 symlink "$CHECKOUT_DIR/dircolors.ansi-dark" .dircolors
+
+# install custom bins
+mkdir .local
+symlink "$CHECKOUT_DIR/bin" .local
+
