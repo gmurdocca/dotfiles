@@ -10,6 +10,7 @@ alias tmux-join="tmux new-session -t"
 alias t="tmux attach"
 alias v='vim'
 alias ll='ls --color=auto -la'
+alias l='ls --color=auto -la'
 alias d='cd ~/development'
 
 # Editor:
