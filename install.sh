@@ -1,8 +1,6 @@
 #!/bin/bash
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-echo $CHECKOUT_DIR
-exit
-FILES="bash_profile tmux.conf vim vimrc zshrc zsh_functions gitconfig psqlrc ipython matplotlib"
+FILES="bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig psqlrc ipython matplotlib"
 
 read -p "Are you sure you want to clobber all your config files? (y/n)" -n 1
 [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
@@ -36,6 +34,30 @@ symlink "$CHECKOUT_DIR/_terminator" ".config/terminator/config"
 symlink "$CHECKOUT_DIR/dircolors.ansi-dark" .dircolors
 
 # install custom bins
-mkdir .local
+mkdir -p .local
 symlink "$CHECKOUT_DIR/bin" .local
 
+# ipython
+conf_src_dir="$CHECKOUT_DIR/_ipython/"
+conf_dest_dir=${HOME}/.ipython
+find "${conf_src_dir}" -type f | while read f; do 
+    conf_src_file=$(readlink -m $f)
+    len_conf_src_dir=${#conf_src_dir}
+    rel_dest_path=${conf_src_file:${len_conf_src_dir}}
+    abs_dest_path=${conf_dest_dir}/${rel_dest_path}
+    abs_dest_dir=$(dirname ${abs_dest_path})
+    mkdir -p ${abs_dest_dir}
+    symlink ${conf_src_file} ${abs_dest_path}
+done
+
+# install neobundle for vim if not installed
+if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
+    if ! type git >/dev/null 2>&1; then
+        echo ERROR: Please install git so that I can install NeoBundle for Vim, then re-run this script.
+        exit 1
+    fi
+    curl -s https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > /tmp/neobundle_install.sh
+    sh /tmp/neobundle_install.sh >/dev/null 2>&1
+fi
+
+echo Done!

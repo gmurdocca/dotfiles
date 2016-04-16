@@ -43,9 +43,10 @@ GREEN="\[\e[0;32m\]"
 BLDGREEN="\[\e[1;32m\]"
 YELLOW="\[\e[0;33m\]"
 BLDCYAN="\[\e[1;36m\]"
-BLDBLUE="\[\e[01;34m\]"
-WHITEONGREEN="\[e[42;1;37m\]"
+BLDBLUE="\[\e[1;34m\]"
+WHITEONGREEN="\[\e[42;1;37m\]"
 RED="\[\e[0;31m\]"
+BLDRED="\[\e[1;31m\]"
 BLUE="\[\e[0;34m\]"
 
 # Prompt
@@ -53,14 +54,14 @@ job_status="\`if [ \$? = 0 ]; then echo \[\e[32m\]:\)\[\e[0m\]; else echo \[\e[3
 CURRENTUSER=`whoami`
 if [ "$CURRENTUSER" = "root" ]; then
     uhp_status="${RED}\u${GREEN}@\h ${BLUE}\w"
-    prompt="#"
+    prompt="${BLDRED}#"
 else
     uhp_status="${DEFAULT}\u${GREEN}@\h ${BLUE}\w"
-    prompt="$"
+    prompt="${BLDGREEN}$"
 fi
 vcs_status="${PINK}\$(vcprompt)"
 bgj_status="\[\033[1;37m\]\`if [ \$(jobs | wc -l | tr -d ' ') -gt 0 ]; then echo '[jobs:\j] \[\e[0m\]'; fi\`"
-export PS1="${job_status} ${uhp_status} ${vcs_status}${bgj_status}\n${DEFAULT}${prompt} "
+export PS1="${job_status} ${uhp_status} ${vcs_status}${bgj_status}\n${DEFAULT}${prompt}${DEFAULT} "
 
 # Make ~/.bash_history unbounded in size (from: http://mywiki.wooledge.org/BashFAQ/088)
 unset HISTFILESIZE
