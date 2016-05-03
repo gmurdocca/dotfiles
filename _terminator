@@ -1,6 +1,7 @@
 [global_config]
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   inactive_color_offset = 1.0
+  title_receive_bg_color = "#004b81"
   title_transmit_bg_color = "#079800"
 [keybindings]
   switch_to_tab_1 = <Alt>1
@@ -29,5 +30,5 @@
     background_type = transparent
     font = DejaVu Sans Mono for Powerline 10
     foreground_color = "#ffffff"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#4d4d4d:#839496:#6c71c4:#93a1a1:#fdf6e3"
     scrollback_lines = 100000
