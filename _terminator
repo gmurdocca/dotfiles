@@ -1,5 +1,5 @@
 [global_config]
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, Logger, LaunchpadBugURLHandler
   inactive_color_offset = 1.0
   title_receive_bg_color = "#004b81"
   title_transmit_bg_color = "#079800"
