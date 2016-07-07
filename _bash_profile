@@ -98,3 +98,5 @@ if hash powerline-daemon 2>/dev/null; then
     fi
 fi
 
+# Close Steam to system tray
+export STEAM_FRAME_FORCE_CLOSE=1
