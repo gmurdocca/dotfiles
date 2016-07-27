@@ -4,6 +4,7 @@
   title_receive_bg_color = "#004b81"
   title_transmit_bg_color = "#079800"
 [keybindings]
+  next_profile = <Primary>period
   switch_to_tab_1 = <Alt>1
   switch_to_tab_10 = <Alt>0
   switch_to_tab_2 = <Alt>2

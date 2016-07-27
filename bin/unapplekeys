@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # toggle function keys
-echo 2 > /sys/module/hid_apple/parameters/fnmode
+sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
 
 # swap alt and super
-echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd
+sudo echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd
 
 
