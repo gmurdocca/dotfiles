@@ -1,6 +1,6 @@
 #!/bin/bash
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-FILES="bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig psqlrc ipython matplotlib"
+FILES="bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig psqlrc ipython matplotlib sshrc sshrc.d"
 
 read -p "Are you sure you want to clobber all your config files? (y/n)" -n 1
 [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
