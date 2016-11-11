@@ -31,7 +31,7 @@
     background_type = transparent
     font = DejaVu Sans Mono for Powerline 10
     foreground_color = "#ffffff"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#4d4d4d:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    palette = "#32626e:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#297082:#cb4b16:#6995a3:#8e6868:#839496:#6c71c4:#93a1a1:#fdf6e3"
     scrollback_lines = 100000
   [[4kdisplay]]
     background_darkness = 0.96

@@ -100,3 +100,6 @@ fi
 
 # Close Steam to system tray
 export STEAM_FRAME_FORCE_CLOSE=1
+
+# user literal quoting style with ls
+QUOTING_STYLE=literal

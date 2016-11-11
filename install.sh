@@ -35,7 +35,7 @@ symlink "$CHECKOUT_DIR/dircolors.ansi-dark" .dircolors
 
 # install custom bins
 mkdir -p .local
-symlink "$CHECKOUT_DIR/bin" .local
+symlink "$CHECKOUT_DIR/bin" .local/bin
 
 # ipython
 conf_src_dir="$CHECKOUT_DIR/_ipython/"
