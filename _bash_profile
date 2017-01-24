@@ -21,7 +21,7 @@ alias l='ls --color=auto -la'
 alias d='cd ~/development'
 alias pls='sudo'
 alias sry='sudo $( history -p "!!" )'
-alias rootme='sudo su -s /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
+alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
 
 # Editor:
 export EDITOR=vim

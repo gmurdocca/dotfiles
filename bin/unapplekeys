@@ -2,7 +2,7 @@
 
 # toggle function keys
 echo Toggling function keys...
-sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
+sudo bash --login -c 'echo 2 > /sys/module/hid_apple/parameters/fnmode'
 
 # swap alt and super
 echo Swapping alt and super...
