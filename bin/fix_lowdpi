@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# fixes scaling DPI if it is a low DPI 1080p display
+
+# if your hidpi monitor is AxB pixels and your regular monitor is CxD and you are scaling by [ExF], the commandline for right-of is:
+# xrandr --output eDP1 --auto --output HDMI1 --auto --panning [C*E]x[D*F]+[A]+0 --scale [E]x[F] --right-of eDP1
+
+xrandr --output eDP1 --auto --output DP1 --auto --panning 3840x2160+2400+0 --scale 2x2 --right-of eDP1
+
+
