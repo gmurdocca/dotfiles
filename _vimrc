@@ -286,6 +286,8 @@ au BufNewFile,BufRead *.md setlocal ft=markdown               " markdown
 au BufNewFile,BufRead *.gradle setlocal ft=groovy             " gradle
 au BufNewFile,BufRead *.mako,*.mak,*.jinja2 setlocal ft=html  " mako/html/django
 au BufNewFile,BufRead cronjobs.* setlocal ft=crontab          " crontab
+au BufNewFile,BufRead *.sol set syntax=javascript             " solidity
+
 
 au FileType html,xhtml,xml,css,htmldjango,handlebars.html,puppet,ruby,javascript,coffee,haskell,fish,vim,markdown setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 au FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
