@@ -91,6 +91,13 @@ vim() {  # set the title of the current window to the file we're editing
   settitle `basename $SHELL`
 }
 
+gac() { # requires TLX package to be installed, sets AWS auth env vars
+  for i in "$( get-aws-creds "$@" --quiet)"; do
+    eval "${i}";
+  done
+}
+
+
 # start powerline-daemon if it is in $PATH and not already running
 if hash powerline-daemon 2>/dev/null; then
     if [ -z "$( ps aux | grep powerline-daemon | grep -v grep )" ]; then
@@ -103,3 +110,5 @@ export STEAM_FRAME_FORCE_CLOSE=1
 
 # user literal quoting style with ls
 QUOTING_STYLE=literal
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt/idea-IC-181.4668.68/bin:$PATH"

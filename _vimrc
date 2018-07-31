@@ -107,10 +107,15 @@ nmap <leader>gb :Gblame<CR>
 nmap <leader>gp :Git push<CR>
 
 " ctrl-{jklm} changes to that split
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+"map <c-j> <c-w>j
+"map <c-k> <c-w>k
+"map <c-l> <c-w>l
+"map <c-h> <c-w>h
+
+" alt-{hl} moves to tab left/right, alt-n for new tab
+map  <c-l> :tabn<CR>
+map  <c-h> :tabp<CR>
+map  <c-n> :tabnew<CR>
 
 " Open NerdTree
 map <leader>n :NERDTreeToggle<CR>
@@ -367,6 +372,10 @@ let g:vim_json_syntax_conceal = 0
 " configure airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'bubblegum'
+
+" configure nerdtree
+let NERDTreeShowHidden=1
+
 
 " Add the virtualenv's site-packages to vim path
 if has('python') && !empty($VIRTUAL_ENV)

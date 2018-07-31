@@ -1,6 +1,6 @@
 [user]
     name = George Murdocca
-    email = george@murdocca.com.au
+    email = george@linuxdojo.com
 [diff]
     tool = vimdiff
 [alias]
@@ -16,4 +16,4 @@
 [push]
 	default = simple
 [credential]
-	helper = cache
+	helper = store
