@@ -117,12 +117,10 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt/id
 SSH_ENV="$HOME/.ssh/environment"
 
 function start_agent {
-    echo "Initialising new SSH agent..."
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
     chmod 600 "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
+    ssh-add $(find ~/.ssh -maxdepth 1 -type f -not -name "*pub" -name "*rsa*")
 }
 
 # Source SSH settings, if applicable
@@ -131,12 +129,12 @@ if [ -f "${SSH_ENV}" ]; then
     . "${SSH_ENV}" > /dev/null
     #ps ${SSH_AGENT_PID} doesn't work under cywgin
     ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
+        start_agent >/dev/null 2>&1;
     }
 else
-    start_agent;
+    start_agent >/dev/null 2>&1;
 fi
-ssh-add $(find ~/.ssh -maxdepth 1 -type f -not -name "*pub" -name "*rsa*") >/dev/null 2>&1
+
 
 # Set xkeyboardmap 
 setxkbmap `cat ~/.Xkbmap`
