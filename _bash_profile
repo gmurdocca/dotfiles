@@ -138,3 +138,5 @@ else
 fi
 ssh-add $(find ~/.ssh -maxdepth 1 -type f -not -name "*pub" -name "*rsa*") >/dev/null 2>&1
 
+# Set xkeyboardmap 
+setxkbmap `cat ~/.Xkbmap`
