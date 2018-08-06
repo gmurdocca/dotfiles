@@ -137,4 +137,7 @@ fi
 
 
 # Set xkeyboardmap 
-setxkbmap `cat ~/.Xkbmap`
+if [ -f ~/.Xkbmap ]; then
+    setxkbmap `cat ~/.Xkbmap`
+fi
+
