@@ -93,6 +93,7 @@ vim() {  # set the title of the current window to the file we're editing
 
 gac() { # requires TLX package to be installed, sets AWS auth env vars
   for i in "$( get-aws-creds "$@" --quiet)"; do
+    grep -qi error <<< "${i}" && (echo "${i}"; exit 1)
     eval "${i}";
   done
 }
