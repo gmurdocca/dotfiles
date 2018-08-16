@@ -117,6 +117,9 @@ map  <c-l> :tabn<CR>
 map  <c-h> :tabp<CR>
 map  <c-n> :tabnew<CR>
 
+" Ctrl-Shift-c to copy to clipboard via xclip
+map <C-S-c> :'<,'>w !xclip<CR><CR>
+
 " Open NerdTree
 map <leader>n :NERDTreeToggle<CR>
 
