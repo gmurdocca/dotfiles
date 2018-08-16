@@ -139,6 +139,6 @@ fi
 
 # Set xkeyboardmap 
 if [ -f ~/.Xkbmap ]; then
-    setxkbmap `cat ~/.Xkbmap`
+    setxkbmap `cat ~/.Xkbmap` 2>/dev/null
 fi
 
