@@ -1,10 +1,18 @@
 xsetroot -solid black &
 xsetroot -cursor_name left_ptr &
+#xmodmap .Xmodmap
+
+if [ ! -f ~/.xbindkeysrc ]; then
+    xbindkeys --defaults > /home/georgem/.xbindkeysrc &
+fi
 xbindkeys &
-feh --bg-scale ~/.wallpaper.png &
 
-eval $(gnome-keyring-daemon --start)
-export GNOME_KEYRING_SOCKET
-export GNOME_KEYRING_PID
+# Set X background image
+#feh --bg-scale ~/.wallpaper.png &
 
-exec ck-launch-session xmonad
+#eval $(gnome-keyring-daemon --start)
+#export GNOME_KEYRING_SOCKET
+#export GNOME_KEYRING_PID
+#
+#exec ck-launch-session xmonad
+
