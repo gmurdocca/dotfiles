@@ -143,5 +143,5 @@ if [ -f ~/.Xkbmap ]; then
 fi
 
 # map esc to grave/tilde 
-xmodmap -e "keycode 9 = grave asciitilde"
+$(which xmodmap >/dev/null 2>&1) && xmodmap -e "keycode 9 = grave asciitilde"
 
