@@ -22,6 +22,7 @@ alias d='cd ~/development'
 alias pls='sudo'
 alias sry='sudo $( history -p "!!" )'
 alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
+alias cat='bat'
 
 # Editor:
 export EDITOR=vim
@@ -98,6 +99,17 @@ gac() { # requires TLX package to be installed, sets AWS auth env vars
   done
 }
 
+meep() {
+  frequency=${1}
+  duration=${2}
+  if [ -z "${frequency}" ]; then frequency=1000; fi
+  if [ -z "${duration}" ]; then duration=300; fi
+  ( \speaker-test --frequency ${frequency} --test sine >/dev/null 2>&1)&
+  pid=$!
+  \sleep 0.${duration}s
+  \kill -9 $pid >/dev/null
+  \sleep 0.01
+} >/dev/null 2>&1
 
 # start powerline-daemon if it is in $PATH and not already running
 if hash powerline-daemon 2>/dev/null; then
