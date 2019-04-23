@@ -67,6 +67,7 @@ NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'airblade/vim-gitgutter'
 
 " Required:
 call neobundle#end()
@@ -377,8 +378,12 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'bubblegum'
 
 " configure nerdtree
-let NERDTreeShowHidden=1
-
+let NERDTreeShowHidden = 1
+let g:nerdtree_tabs_open_on_console_startup = 1
+let g:NERDTreeWinSize=27
+autocmd VimEnter * NERDTree
+" focus cursor on the content we want to edit
+autocmd VimEnter * wincmd w
 
 " Add the virtualenv's site-packages to vim path
 if has('python') && !empty($VIRTUAL_ENV)

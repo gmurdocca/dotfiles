@@ -17,3 +17,5 @@
 	default = simple
 [credential]
 	helper = store
+[core]
+	excludesfile = /home/georgem/.gitignore_global
