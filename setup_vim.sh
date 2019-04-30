@@ -22,7 +22,7 @@ if [ $has_lua != '1' ]; then
     echo ""
     echo -n "Continue anyway [y/n]? "
     read ans
-    if [ ${ans,,} != y* ]; then
+    if [[ ${ans,,} != y* ]]; then
         exit 1
     fi
 else
