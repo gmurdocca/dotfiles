@@ -12,8 +12,19 @@ vim_exc=$(which -a vim | grep bin | head -n1)
 has_lua=`$vim_exc -nes -S <(echo 'verbose echo has("lua")') +quit 2>&1`
 if [ $has_lua != '1' ]; then
     echo NO
-    echo ERROR: Your vim at $vim_exc does not support Lua, please fix.
-    exit 1
+    echo ERROR: Your vim at $vim_exc does not support Lua, please fix:
+    echo "      for Ubuntu:"
+    echo "         add-apt-repository universe"
+    echo "         apt-get update"
+    echo "         sudo apt install vim-nox"
+    echo "      for OSX:"
+    echo "          brew install vim --with-lua"
+    echo ""
+    echo -n "Continue anyway [y/n]? "
+    read ans
+    if [ ${ans,,} != y* ]; then
+        exit 1
+    fi
 else
     echo Ok
 fi
