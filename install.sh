@@ -50,14 +50,9 @@ find "${conf_src_dir}" -type f | while read f; do
     symlink ${conf_src_file} ${abs_dest_path}
 done
 
-# install neobundle for vim if not installed
-if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
-    if ! type git >/dev/null 2>&1; then
-        echo ERROR: Please install git so that I can install NeoBundle for Vim, then re-run this script.
-        exit 1
-    fi
-    curl -s https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > /tmp/neobundle_install.sh
-    sh /tmp/neobundle_install.sh >/dev/null 2>&1
+# install dein for vim if not installed
+if [ ! -d ~/.vim/repos/github.com/Shougo/dein.vim ]; then
+    ./setup_vim.sh
 fi
 
 echo Done!

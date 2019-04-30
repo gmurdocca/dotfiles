@@ -1,82 +1,92 @@
-set nocompatible              " be awesome
-
-" =========
-" NeoBundle
-" =========
-" Set up NeoBundle
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-
-"NeoBundle Scripts-----------------------------
+" ======
+"  Dein
+" ======
+set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
 if &compatible
   set nocompatible               " Be iMproved
 endif
+if dein#load_state('~/.vim')
+  call dein#begin('~/.vim')
+  " Let dein manage dein
+  call dein#add('/home/georgem/.vim/repos/github.com/Shougo/dein.vim')
 
-" Required:
-set runtimepath^=~/.vim/bundle/neobundle.vim/
+  " Add or remove your plugins here:
+  "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add('Shougo/neosnippet-snippets')
+  "call dein#add('vcscommand.vim')
+  "call dein#add('SudoEdit.vim')
+  "call dein#add('Valloric/YouCompleteMe')
+  call dein#add('AndrewRadev/linediff.vim')
+  call dein#add('Glench/Vim-Jinja2-Syntax')
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/unite-outline')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Xuyuanp/nerdtree-git-plugin')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('chriskempson/base16-vim')
+  call dein#add('dag/vim-fish')
+  call dein#add('derekwyatt/vim-scala')
+  call dein#add('elzr/vim-json')
+  call dein#add('ervandew/supertab')
+  call dein#add('fatih/vim-go')  "then  :GoInstalBinaries
+  call dein#add('jceb/vim-orgmode')
+  call dein#add('jiangmiao/auto-pairs')
+  call dein#add('kristijanhusak/vim-multiple-cursors')
+  call dein#add('mileszs/ack.vim')
+  call dein#add('mxw/vim-jsx')
+  call dein#add('nono/vim-handlebars')
+  call dein#add('rodjek/vim-puppet')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('sjl/gundo.vim')
+  call dein#add('takac/vim-commandcaps')
+  call dein#add('tommcdo/vim-lion')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-speeddating')
+  call dein#add('tpope/vim-surround.git')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('vim-syntastic/syntastic')
+  call dein#add('wellle/targets.vim')
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+  " Experimental
+  call dein#add('reedes/vim-lexical')
+
+  " You can specify revision/branch/tag.
+  "call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+  " TypeScript Stuff
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('Quramy/tsuquyomi')
+  call dein#add('Quramy/vim-js-pretty-template')
+  "call dein#add('pangloss/vim-javascript')  " DONOT USE, BREAKS tsuquyomi !!
+  "call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+ 
+
+"########### end from tim
 
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Bundles to install
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \   'windows' : 'make -f make_mingw32.mak',
-  \   'cygwin'  : 'make -f make_cygwin.mak',
-  \   'mac'     : 'make -f make_mac.mak',
-  \   'unix'    : 'make -f make_unix.mak',
-  \    },
-  \ }
+  call dein#end()
+  call dein#save_state()
+endif
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'VimClojure'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'rodjek/vim-puppet'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'vcscommand.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'SudoEdit.vim'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'takac/vim-commandcaps'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'vim-coffee-script'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'jceb/vim-orgmode'
-NeoBundle 'tpope/vim-speeddating'
-NeoBundle 'AndrewRadev/linediff.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'nono/vim-handlebars'
-NeoBundle 'tommcdo/vim-lion'
-NeoBundle 'dag/vim-fish'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'wellle/targets.vim'
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'airblade/vim-gitgutter'
-
-" Required:
-call neobundle#end()
-
-" Required:
 filetype plugin indent on
+syntax enable
 
-" Bundle installation check.
-NeoBundleCheck
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
 
 " =========
 " Shortcuts
@@ -336,9 +346,6 @@ nnoremap <C-p> :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/a
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank -start-insert history/yank<cr>
 nnoremap <leader>s :<C-u>Unite -no-split -buffer-name=grep -start-insert grep:.:-iR<cr>
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-
-" Clojure options
-let vimclojure#ParenRainbow = 1
 
 " make esc happen in insert mode without waiting for timeoutlen
 augroup FastEscape
