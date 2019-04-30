@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 FILES="xinitrc Xkbmap bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig gitignore_global psqlrc ipython matplotlib sshrc sshrc.d"
 
@@ -52,7 +52,7 @@ done
 
 # install dein for vim if not installed
 if [ ! -d ~/.vim/repos/github.com/Shougo/dein.vim ]; then
-    ./setup_vim.sh
+    $CHECKOUT_DIR/setup_vim.sh
 fi
 
 echo Done!
