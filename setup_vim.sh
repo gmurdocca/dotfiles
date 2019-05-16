@@ -32,8 +32,7 @@ else
     echo "            sudo apt install vim -y"
     echo ""
     if [[ ! "$1" =~ ^-[yY] ]]; then
-        echo -n "Hit Ctrl-C to abort, else continuing in "
-        echo ""
+        echo -n "Hit Ctrl-C to abort (add -y option to suppress this), else continuing in "
         count=5
         while [ $count -gt 0 ]; do
             echo -n "$count "

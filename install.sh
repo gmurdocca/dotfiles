@@ -6,7 +6,7 @@ echo "--+++===] Dotfiles Installer [===+++--"
 echo ""
 echo "Existing config files that are not symlinks will be renamed to <original_name>.dotfile_backup."
 if [[ ! "$1" =~ ^-[yY] ]]; then
-    echo -n "Hit Ctrl-C to abort, else continuing in "
+    echo -n "Hit Ctrl-C to abort (add -y option to suppress), else continuing in "
     count=5
     while [ $count -gt 0 ]; do
         echo -n "$count "
