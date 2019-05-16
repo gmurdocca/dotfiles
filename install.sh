@@ -1,17 +1,20 @@
  #!/bin/bash
 
+
 echo ""
 echo "--+++===] Dotfiles Installer [===+++--"
 echo ""
 echo "Existing config files that are not symlinks will be renamed to <original_name>.dotfile_backup."
-echo -n "Hit Ctrl-C to abort, else continuing in "
-count=5
-while [ $count -gt 0 ]; do
-    echo -n "$count "
-    ((count-=1))
-    sleep 1
-done
-echo ""
+if [[ ! "$1" =~ ^-[yY] ]]; then
+    echo -n "Hit Ctrl-C to abort, else continuing in "
+    count=5
+    while [ $count -gt 0 ]; do
+        echo -n "$count "
+        ((count-=1))
+        sleep 1
+    done
+    echo ""
+fi
 
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 FILES="xinitrc Xkbmap bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig gitignore_global psqlrc ipython matplotlib sshrc sshrc.d"
@@ -63,6 +66,6 @@ find "${conf_src_dir}" -type f | while read f; do
 done
 
 # install dein for vim if not installed
-$CHECKOUT_DIR/setup_vim.sh
+$CHECKOUT_DIR/setup_vim.sh $1
 
 echo Done!

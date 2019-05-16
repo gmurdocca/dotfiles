@@ -26,20 +26,22 @@ else
     echo ""
     echo "         *** Neobundle will be installed instead of Dein ***"
     echo ""
-    echo "         Ctrl-C now if you want to upgrade to Vim >= 8.x"
-    echo ""
     echo "         To upgrade Vim on Ubuntu:"
     echo "            sudo add-apt-repository ppa:jonathonf/vim -y"
     echo "            sudo apt update"
     echo "            sudo apt install vim -y"
     echo ""
-    count=5
-    while [ $count -gt 0 ]; do
-        echo -n "$count "
-        ((count-=1))
-        sleep 1
-    done
-    echo ""
+    if [[ ! "$1" =~ ^-[yY] ]]; then
+        echo "         Ctrl-C now if you want to upgrade to Vim >= 8.x"
+        echo ""
+        count=5
+        while [ $count -gt 0 ]; do
+            echo -n "$count "
+            ((count-=1))
+            sleep 1
+        done
+        echo ""
+    fi
     #### Install NeoBundle...
     echo "Installing NeoBundle..."
     
