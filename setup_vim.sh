@@ -32,7 +32,7 @@ else
     echo "            sudo apt install vim -y"
     echo ""
     if [[ ! "$1" =~ ^-[yY] ]]; then
-        echo "         Ctrl-C now if you want to upgrade to Vim >= 8.x"
+        echo -n "Hit Ctrl-C to abort, else continuing in "
         echo ""
         count=5
         while [ $count -gt 0 ]; do
