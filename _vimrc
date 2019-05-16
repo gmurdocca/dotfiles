@@ -77,7 +77,8 @@ if v:version < 800
 		\ }
 	" install plugins in vim_plugins list
 	for vim_plugin in vim_plugins
-		NeoBundle vim_plugin
+		"NeoBundle vim_plugin
+		call neobundle#add(vim_plugin)
 	endfor
 	" Required:
 	call neobundle#end()
@@ -85,6 +86,8 @@ if v:version < 800
 	filetype plugin indent on
 	" Bundle installation check.
 	NeoBundleCheck
+  " Suppress 'vim-go requires Vim 7.4.2009 or Neovim 0.3.1' error
+  let g:go_version_warning = 0
 else
   " ************* Setup Dein if vim >= 8x
   set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
