@@ -60,21 +60,14 @@ if [ $has_lua == '1' ]; then
     echo Ok
 else
     echo NO
-    echo ERROR: Your Vim at $vim_exc does not support Lua, please fix:
-    echo "      for Ubuntu:"
-    echo "         add-apt-repository universe"
-    echo "         apt-get update"
-    echo "         sudo apt install vim-nox"
-    echo "      for OSX:"
-    echo "          brew install vim --with-lua"
+    echo WARNING: Your Vim at $vim_exc does not support Lua. To fix:
+    echo "          for Ubuntu:"
+    echo "              add-apt-repository universe"
+    echo "              apt-get update"
+    echo "              sudo apt install vim-nox"
+    echo "          for OSX:"
+    echo "              brew install vim --with-lua"
     echo ""
-    echo -n "Ctrl-C to quit, or continuing in "
-    count=5
-    while [ $count -gt 0 ]; do
-        echo -n "$count "
-        ((count-=1))
-        sleep 1
-    done
 fi
 
 
