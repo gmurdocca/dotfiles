@@ -1,12 +1,19 @@
 ## Dotfiles
 
-Graciously forked from [@dzderic](https://github.com/dzderic)
-
-
 ### Config files for various tools including:
 
-* VIM (assumes [NeoBundle](https://github.com/Shougo/neobundle.vim) is installed)
+* Vim (installs Dein or Neobundle dependent on Vim compatibility) 
 * tmux
 * powerline
 * terminator
+* git
+* ipython
+* ssh
 * etc...
+
+### Installation
+
+```
+git clone http://github.com/gmurdocca/dotfiles
+./install.sh
+```

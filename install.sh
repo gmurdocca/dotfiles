@@ -1,16 +1,28 @@
  #!/bin/bash
+
+echo ""
+echo "--+++===] Dotfiles Installer [===+++--"
+echo ""
+echo "Existing config files that are not symlinks will be renamed to <original_name>.dotfile_backup."
+echo -n "Hit Ctrl-C to abort, else continuing in "
+count=5
+while [ $count -gt 0 ]; do
+    echo -n "$count "
+    ((count-=1))
+    sleep 1
+done
+echo ""
+
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 FILES="xinitrc Xkbmap bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig gitignore_global psqlrc ipython matplotlib sshrc sshrc.d"
-
-read -p "Are you sure you want to clobber all your config files? (y/n)" -n 1
-[[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
-echo
-
 cd $HOME
 
 function symlink() {
     # Remove the old config if it's not a symlink
-    [ -f "$2" ] && [ ! -L "$2" ] && rm -f "$2"
+    if [ -f "$2" ] && [ ! -L "$2" ]; then
+        mv "$2" "$2.dotfile_backup"
+        #rm -f "$2"
+    fi
 
     if [[ ! -a "$2" ]]; then
         echo "Linking '$1' to '$2'"
@@ -51,8 +63,6 @@ find "${conf_src_dir}" -type f | while read f; do
 done
 
 # install dein for vim if not installed
-if [ ! -d ~/.vim/repos/github.com/Shougo/dein.vim ]; then
-    $CHECKOUT_DIR/setup_vim.sh
-fi
+$CHECKOUT_DIR/setup_vim.sh
 
 echo Done!
