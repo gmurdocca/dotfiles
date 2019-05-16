@@ -1,90 +1,120 @@
-" ======
-"  Dein
-" ======
-set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
+" #############
+" ## .vimrc
+" #############
+
 if &compatible
-  set nocompatible               " Be iMproved
-endif
-if dein#load_state('~/.vim')
-  call dein#begin('~/.vim')
-  " Let dein manage dein
-  call dein#add('/home/georgem/.vim/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
-  "call dein#add('vcscommand.vim')
-  "call dein#add('SudoEdit.vim')
-  "call dein#add('Valloric/YouCompleteMe')
-  call dein#add('AndrewRadev/linediff.vim')
-  call dein#add('Glench/Vim-Jinja2-Syntax')
-  call dein#add('Lokaltog/vim-easymotion')
-  call dein#add('Shougo/neocomplcache.vim')
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/unite-outline')
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Xuyuanp/nerdtree-git-plugin')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('altercation/vim-colors-solarized')
-  call dein#add('chriskempson/base16-vim')
-  call dein#add('dag/vim-fish')
-  call dein#add('derekwyatt/vim-scala')
-  call dein#add('elzr/vim-json')
-  call dein#add('ervandew/supertab')
-  call dein#add('fatih/vim-go')  "then  :GoInstalBinaries
-  call dein#add('jceb/vim-orgmode')
-  call dein#add('jiangmiao/auto-pairs')
-  call dein#add('kristijanhusak/vim-multiple-cursors')
-  call dein#add('mileszs/ack.vim')
-  call dein#add('mxw/vim-jsx')
-  call dein#add('nono/vim-handlebars')
-  call dein#add('rodjek/vim-puppet')
-  call dein#add('scrooloose/nerdcommenter')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('sjl/gundo.vim')
-  call dein#add('takac/vim-commandcaps')
-  call dein#add('tommcdo/vim-lion')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-speeddating')
-  call dein#add('tpope/vim-surround.git')
-  call dein#add('tpope/vim-unimpaired')
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('vim-syntastic/syntastic')
-  call dein#add('wellle/targets.vim')
-
-  " Experimental
-  call dein#add('reedes/vim-lexical')
-
-  " You can specify revision/branch/tag.
-  "call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-
-  " TypeScript Stuff
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('Quramy/tsuquyomi')
-  call dein#add('Quramy/vim-js-pretty-template')
-  "call dein#add('pangloss/vim-javascript')  " DONOT USE, BREAKS tsuquyomi !!
-  "call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
- 
-
-"########### end from tim
-
-
-
-  call dein#end()
-  call dein#save_state()
+	set nocompatible               " Be iMproved
 endif
 
-filetype plugin indent on
-syntax enable
+" Create plugins list
+let vim_plugins = [
+   \'AndrewRadev/linediff.vim',
+   \'Glench/Vim-Jinja2-Syntax',
+   \'Lokaltog/vim-easymotion',
+   \'Shougo/neocomplcache.vim',
+   \'Shougo/neocomplete.vim',
+   \'Shougo/neosnippet-snippets',
+   \'Shougo/neosnippet.vim',
+   \'Shougo/unite-outline',
+   \'Shougo/unite.vim',
+   \'Xuyuanp/nerdtree-git-plugin',
+   \'airblade/vim-gitgutter',
+   \'altercation/vim-colors-solarized',
+   \'chriskempson/base16-vim',
+   \'dag/vim-fish',
+   \'derekwyatt/vim-scala',
+   \'elzr/vim-json',
+   \'ervandew/supertab',
+   \'fatih/vim-go',
+   \'jceb/vim-orgmode',
+   \'jiangmiao/auto-pairs',
+   \'kristijanhusak/vim-multiple-cursors',
+   \'mileszs/ack.vim',
+   \'mxw/vim-jsx',
+   \'nono/vim-handlebars',
+   \'rodjek/vim-puppet',
+   \'scrooloose/nerdcommenter',
+   \'scrooloose/nerdtree',
+   \'sjl/gundo.vim',
+   \'takac/vim-commandcaps',
+   \'tommcdo/vim-lion',
+   \'tomtom/tcomment_vim',
+   \'tpope/vim-fugitive',
+   \'tpope/vim-repeat',
+   \'tpope/vim-speeddating',
+   \'tpope/vim-surround.git',
+   \'tpope/vim-unimpaired',
+   \'vim-airline/vim-airline',
+   \'vim-airline/vim-airline-themes',
+   \'vim-syntastic/syntastic',
+   \'wellle/targets.vim',
+   \'reedes/vim-lexical',
+   \'leafgarland/typescript-vim',
+   \'Quramy/tsuquyomi',
+   \'Quramy/vim-js-pretty-template',
+   \]
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
+
+if v:version < 800
+  " ************* Setup Neobundle if vim <= 8x
+	if has('vim_starting')
+		set runtimepath+=~/.vim/bundle/neobundle.vim/
+	endif
+	" Required:
+	set runtimepath^=~/.vim/bundle/neobundle.vim/
+	" Required:
+	call neobundle#begin(expand('~/.vim/bundle'))
+	" Let NeoBundle manage NeoBundle
+	NeoBundleFetch 'Shougo/neobundle.vim'
+	" Bundles to install
+	NeoBundle 'Shougo/vimproc', {
+		\ 'build' : {
+		\   'windows' : 'make -f make_mingw32.mak',
+		\   'cygwin'  : 'make -f make_cygwin.mak',
+		\   'mac'     : 'make -f make_mac.mak',
+		\   'unix'    : 'make -f make_unix.mak',
+		\    },
+		\ }
+	" install plugins in vim_plugins list
+	for vim_plugin in vim_plugins
+		NeoBundle vim_plugin
+	endfor
+	" Required:
+	call neobundle#end()
+	" Required:
+	filetype plugin indent on
+	" Bundle installation check.
+	NeoBundleCheck
+else
+  " ************* Setup Dein if vim >= 8x
+  set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
+  if dein#load_state('~/.vim')
+    call dein#begin('~/.vim')
+    " Let dein manage dein
+    call dein#add('/home/georgem/.vim/repos/github.com/Shougo/dein.vim')
+		" install plugins in vim_plugins list
+		for vim_plugin in vim_plugins
+			call dein#add(vim_plugin)
+		endfor
+    " Add or remove your extra dein plugins here:
+    "call dein#add('Shougo/neosnippet.vim')
+    "call dein#add('Shougo/neosnippet-snippets')
+    "call dein#add('vcscommand.vim')
+    "call dein#add('SudoEdit.vim')
+    "call dein#add('Valloric/YouCompleteMe')
+    " You can specify revision/branch/tag.
+    "call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+    "call dein#add('pangloss/vim-javascript')  " DONOT USE, BREAKS tsuquyomi !!
+    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+    call dein#end()
+    call dein#save_state()
+  endif
+	filetype plugin indent on
+	syntax enable
+	" If you want to install not installed plugins on startup.
+	if dein#check_install()
+		call dein#install()
+	endif
 endif
 
 
