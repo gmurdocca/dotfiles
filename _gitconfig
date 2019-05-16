@@ -18,7 +18,7 @@
 [url "https://"]
 	insteadOf = git://
 [push]
-	default = simple
+	#default = simple
     followTags = true
 [credential]
 	helper = store
