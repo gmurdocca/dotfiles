@@ -39,10 +39,11 @@ else
         ((count-=1))
         sleep 1
     done
+    echo ""
     #### Install NeoBundle...
     echo "Installing NeoBundle..."
     
-    if [ -d ~.vim/bundle/neobundle.vim ]; then
+    if [ -d ~/.vim/bundle/neobundle.vim ]; then
         echo Neobundle is already installed, Vim appears to be setup already.
     else
         tmpfile=$(mktemp /tmp/neobundle_installer.XXXXXX)
