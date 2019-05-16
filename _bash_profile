@@ -19,13 +19,16 @@ alias v='vim'
 alias ll='ls --color=auto -la'
 alias l='ls --color=auto -la'
 alias d='cd ~/development'
-alias pls='sudo'
-alias sry='sudo $( history -p "!!" )'
+alias please='sudo'
+alias sorry='sudo $( history -p "!!" )'
 alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
 
 # Editor:
 export EDITOR=vim
 export PSQL_EDITOR='vim -c "set ft=sql"'
+
+# Disable Ctrl-S
+stty stop undef
 
 # PATH changes
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
