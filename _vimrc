@@ -424,6 +424,8 @@ let g:NERDTreeWinSize=27
 autocmd VimEnter * NERDTree
 " focus cursor on the content we want to edit
 autocmd VimEnter * wincmd w
+" Automatically quit vim if NERDTree is last and only buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Add the virtualenv's site-packages to vim path
 if has('python') && !empty($VIRTUAL_ENV)
