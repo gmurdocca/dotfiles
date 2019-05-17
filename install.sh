@@ -17,7 +17,7 @@ if [[ ! "$1" =~ ^-[yY] ]]; then
 fi
 
 CHECKOUT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-FILES="xinitrc Xkbmap bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig gitignore_global psqlrc ipython matplotlib sshrc sshrc.d"
+FILES="xinitrc Xkbmap bash_profile tmux.conf vimrc zshrc zsh_functions gitconfig gitignore_global psqlrc matplotlib sshrc sshrc.d"
 cd $HOME
 
 function symlink() {
