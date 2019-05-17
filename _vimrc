@@ -56,10 +56,11 @@ let vim_plugins = [
 
 
 if v:version < 800
-  " ************* Setup Neobundle if vim <= 8x
-	if has('vim_starting')
-		set runtimepath+=~/.vim/bundle/neobundle.vim/
-	endif
+
+  " *******************************************************
+  " ************* Setup NeoBundle if vim < 8x *************
+  " *******************************************************
+
 	" Required:
 	set runtimepath^=~/.vim/bundle/neobundle.vim/
 	" Required:
@@ -88,13 +89,18 @@ if v:version < 800
 	NeoBundleCheck
   " Suppress 'vim-go requires Vim 7.4.2009 or Neovim 0.3.1' error
   let g:go_version_warning = 0
+
 else
-  " ************* Setup Dein if vim >= 8x
+  
+  " ***************************************************
+  " ************* Setup Dein if vim >= 8x *************
+  " ***************************************************
+
   set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
   if dein#load_state('~/.vim')
     call dein#begin('~/.vim')
     " Let dein manage dein
-    call dein#add('/home/georgem/.vim/repos/github.com/Shougo/dein.vim')
+    call dein#add('~/.vim/repos/github.com/Shougo/dein.vim')
 		" install plugins in vim_plugins list
 		for vim_plugin in vim_plugins
 			call dein#add(vim_plugin)

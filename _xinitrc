@@ -3,7 +3,7 @@ xsetroot -cursor_name left_ptr &
 #xmodmap .Xmodmap
 
 if [ ! -f ~/.xbindkeysrc ]; then
-    xbindkeys --defaults > /home/georgem/.xbindkeysrc &
+    xbindkeys --defaults > ~/.xbindkeysrc &
 fi
 xbindkeys &
 

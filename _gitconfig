@@ -23,12 +23,10 @@
 [credential]
 	helper = store
 [core]
-	excludesfile = /home/georgem/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 	fileMode = false
 [submodule]
 	recurse = true
-
-[user]
-	name = George Murdocca
-	email = george@linuxdojo.com
+[include]
+    path = ~/.gitconfig_global
