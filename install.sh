@@ -69,3 +69,10 @@ done
 $CHECKOUT_DIR/setup_vim.sh $1
 
 echo Done!
+echo ""
+echo You may want to create ~/.gitconfig_global with contents:
+echo ""
+echo '[user]'
+echo '   email = <your_email_address>'
+echo '   name = <your name>'
+
