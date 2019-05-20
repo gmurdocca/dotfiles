@@ -31,7 +31,7 @@ export PSQL_EDITOR='vim -c "set ft=sql"'
 stty stop undef
 
 # PATH changes
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 
 # Get pretty ls colours
 if [ -z $DIRCOLORS ]; then 

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Geany wrapper
+
+# Set Geany's temp save dir to somewhere other than /tmp so that unnamed files are preserved
+tmpdir=~/Documents/geany/unnamed
+
+# points to the real geany executable
+execfile=/usr/bin/geany
+
+abs_tmpdir=$(readlink -m "$tmpdir")
+mkdir -p "$abs_tmpdir"
+echo Using tmpdir: $abs_tmpdir
+TMPDIR="$abs_tmpdir" "$execfile" $@
