@@ -77,22 +77,22 @@ export HISTCONTROL=ignoredups:ignorespace
 # When the shell exits, append to the history file instead of overwriting it
 type shopt >/dev/null 2>&1 && shopt -s histappend
 
-# functions for dynamic title renaming 
-settitle() {  # change the title of the current window
-  printf "\033k$1\033\\"
-}
-
-ssh() {  # set the title of the current window to the host we're sshing into
-  settitle "@$( cut -d@ -f2 <<< $* )"
-  command ssh "$@"
-  settitle `basename $SHELL`
-}
-
-vim() {  # set the title of the current window to the file we're editing
-  [[ ! -z "$1" ]] && settitle "%%$( basename $1 )"
-  command vim "$@"
-  settitle `basename $SHELL`
-}
+## functions for dynamic title renaming 
+#settitle() {  # change the title of the current window
+#  printf "\033k$1\033\\"
+#}
+#
+#ssh() {  # set the title of the current window to the host we're sshing into
+#  settitle "@$( cut -d@ -f2 <<< $* )"
+#  command ssh "$@"
+#  settitle `basename $SHELL`
+#}
+#
+#vim() {  # set the title of the current window to the file we're editing
+#  [[ ! -z "$1" ]] && settitle "%%$( basename $1 )"
+#  command vim "$@"
+#  settitle `basename $SHELL`
+#}
 
 gac() { # requires TLX package to be installed, sets AWS auth env vars
   for i in "$( get-aws-creds "$@" --quiet)"; do
