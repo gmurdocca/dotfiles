@@ -403,10 +403,10 @@ let g:jedi#use_splits_not_buffers = "bottom"
 let g:org_todo_keywords=['TODO', 'PROGRESS', '|', 'DONE', 'WASTE']
 
 " window resizing mappings
-nnoremap <M-k> :call Resize('+', 5)<CR>
-nnoremap <M-j> :call Resize('-', 5)<CR>
-nnoremap <M-h> :call Resize('<', 5)<CR>
-nnoremap <M-l> :call Resize('>', 5)<CR>
+nnoremap <M-k> :call Resize('+', 10)<CR>
+nnoremap <M-j> :call Resize('-', 10)<CR>
+nnoremap <M-h> :call Resize('<', 10)<CR>
+nnoremap <M-l> :call Resize('>', 10)<CR>
 
 " configure syntastic
 let g:syntastic_python_checkers = ['pyflakes']
