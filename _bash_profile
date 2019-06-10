@@ -48,18 +48,25 @@ YELLOW="\[\e[0;33m\]"
 BLDCYAN="\[\e[1;36m\]"
 BLDBLUE="\[\e[1;34m\]"
 WHITEONGREEN="\[\e[42;1;37m\]"
+WHITEONYELLOW="\[\e[43;1;37m\]"
 RED="\[\e[0;31m\]"
 BLDRED="\[\e[1;31m\]"
 BLUE="\[\e[0;34m\]"
 
 # Prompt
+
+hostname_color="${GREEN}"
+if [ ! -e ~/.home  ]; then
+    hostname_color="${WHITEONYELLOW}"
+fi
+
 job_status="\`if [ \$? = 0 ]; then echo \[\e[32m\]:\)\[\e[0m\]; else echo \[\e[31m\]:\(\[\e[0m\]; fi\`"
 CURRENTUSER=`whoami`
 if [ "$CURRENTUSER" = "root" ]; then
-    uhp_status="${RED}\u${GREEN}@\h ${BLUE}\w"
+    uhp_status="${RED}\u${hostname_color}@\h${BLUE} \w"
     prompt="${BLDRED}#"
 else
-    uhp_status="${DEFAULT}\u${GREEN}@\h ${BLUE}\w"
+    uhp_status="${DEFAULT}\u${hostname_color}@\h${BLUE} \w"
     prompt="${BLDGREEN}$"
 fi
 vcs_status="${PINK}\$(vcprompt)"
