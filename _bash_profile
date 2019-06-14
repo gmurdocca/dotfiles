@@ -55,8 +55,22 @@ BLUE="\[\e[0;34m\]"
 
 # Prompt
 
+function exists_exec {
+    if which $1 >/dev/null 2>&1; then
+        return 0
+    fi
+    return 1
+}
+
 hostname_color="${GREEN}"
-if [ ! -e ~/.home  ]; then
+homefile=~/.home
+
+if [ "$SUDO_USER" ]; then
+	exists_exec cut && homefile="$(getent passwd $SUDO_USER | cut -d: -f6)/.home" || \
+    exists_exec awk && homefile="$(getent passwd $SUDO_USER | awk -F: '{print $6}')"
+fi
+
+if [ ! -e $homefile ]; then
     hostname_color="${WHITEONYELLOW}"
 fi
 
