@@ -432,6 +432,8 @@ autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd w
 " Automatically quit vim if NERDTree is last and only buffer
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Tell nerdtree to ignore some files
+let NERDTreeIgnore = ['\.pyc$', '\.sw[a-p]$']
 
 " Add the virtualenv's site-packages to vim path
 if has('python') && !empty($VIRTUAL_ENV)
