@@ -67,7 +67,7 @@ homefile=~/.home
 
 if [ "$SUDO_USER" ]; then
 	exists_exec cut && homefile="$(getent passwd $SUDO_USER | cut -d: -f6)/.home" || \
-    exists_exec awk && homefile="$(getent passwd $SUDO_USER | awk -F: '{print $6}')"
+    exists_exec awk && homefile="$(getent passwd $SUDO_USER | awk -F: '{print $6}')/.home"
 fi
 
 if [ ! -e $homefile ]; then
