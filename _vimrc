@@ -52,6 +52,7 @@ let vim_plugins = [
    \'leafgarland/typescript-vim',
    \'Quramy/tsuquyomi',
    \'Quramy/vim-js-pretty-template',
+   \'PProvost/vim-ps1',
    \]
 
 
@@ -169,6 +170,9 @@ map  <c-n> :tabnew<CR>
 
 " Ctrl-Shift-c to copy to clipboard via xclip
 map <C-S-c> :'<,'>w !xclip<CR><CR>
+
+" Ctrl-Shift-s to reverse sort by line length #TODO get this working
+map <C-S-s> :'<,'>s/^/\=repeat('0', 8 - strlen(strlen(getline('.')))) . strlen(getline('.'))/ <CR><CR>:sort!<CR>:'<,'>s/^\d\{8\}//<CR><CR>
 
 " Open NerdTree
 map <leader>n :NERDTreeToggle<CR>
