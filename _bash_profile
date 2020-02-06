@@ -22,6 +22,7 @@ alias d='cd ~/development'
 alias please='sudo'
 alias sorry='sudo $( history -p "!!" )'
 alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
+alias cdc='cd ~/Documents/grive/LinuxDojo/Clients'
 
 # Editor:
 export EDITOR=vim
