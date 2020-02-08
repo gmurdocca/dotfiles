@@ -24,6 +24,8 @@ alias sorry='sudo $( history -p "!!" )'
 alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
 alias cdc='cd ~/Documents/grive/LinuxDojo/Clients'
 
+alias cp-debug='function _cp_debug () { kubectl exec -n ${1:-default} -it $(kubectl get pods -n ${1:-default} -lapp=cp-debug -o name) -- bash ;  } ; _cp_debug'
+
 # Editor:
 export EDITOR=vim
 export PSQL_EDITOR='vim -c "set ft=sql"'
@@ -115,6 +117,19 @@ type shopt >/dev/null 2>&1 && shopt -s histappend
 #  command vim "$@"
 #  settitle `basename $SHELL`
 #}
+
+what() {
+    if [ ${#@} -lt 2  ]; then 
+        echo Usage:
+        echo "  what <command [args..]> <arg_to_resolve_with_which>"
+        echo "eg:"
+        echo "  what cat myscript"
+        echo "  what sudo vim myscript"
+    else 
+        ${@:1:$((${#@} - 1))} $(which ${@:${#@}})
+    fi  
+}
+
 
 gac() { # requires TLX package to be installed, sets AWS auth env vars
   for i in "$( get-aws-creds "$@" --quiet)"; do
