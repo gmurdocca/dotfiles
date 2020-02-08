@@ -25,7 +25,6 @@ let vim_plugins = [
    \'derekwyatt/vim-scala',
    \'elzr/vim-json',
    \'ervandew/supertab',
-   \'fatih/vim-go',
    \'jceb/vim-orgmode',
    \'jiangmiao/auto-pairs',
    \'kristijanhusak/vim-multiple-cursors',
@@ -55,6 +54,10 @@ let vim_plugins = [
    \'PProvost/vim-ps1',
    \]
 
+" List of pligins that need newer vim
+let newvim_plugins = [
+   \'fatih/vim-go',
+   \]
 
 if v:version < 800
 
@@ -105,6 +108,9 @@ else
 		" install plugins in vim_plugins list
 		for vim_plugin in vim_plugins
 			call dein#add(vim_plugin)
+		endfor
+		for newvim_plugin in newvim_plugins
+			call dein#add(newvim_plugin)
 		endfor
     " Add or remove your extra dein plugins here:
     "call dein#add('Shougo/neosnippet.vim')
