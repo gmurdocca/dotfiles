@@ -196,3 +196,7 @@ fi
 # map esc to grave/tilde 
 $(which xmodmap >/dev/null 2>&1) && xmodmap -e "keycode 9 = grave asciitilde" 2>/dev/null
 
+# run a local bashrc if exists
+if [ -e ~/.bashrc_local ];
+    . ~/.bashrc_local
+fi
