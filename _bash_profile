@@ -197,6 +197,6 @@ fi
 $(which xmodmap >/dev/null 2>&1) && xmodmap -e "keycode 9 = grave asciitilde" 2>/dev/null
 
 # run a local bashrc if exists
-if [ -e ~/.bashrc_local ];
+if [ -e ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
