@@ -45,6 +45,11 @@ symlink "$CHECKOUT_DIR/_bash_profile" ".bashrc"
 mkdir -p ".config/terminator"
 symlink "$CHECKOUT_DIR/_terminator" ".config/terminator/config"
 
+# monitors.xml for storing xrandr config under GDM
+mkdir -p ".config"
+symlink "$CHECKOUT_DIR/monitors.xml" ".config/monitors.xml"
+
+
 # Link the dircolors checkout
 symlink "$CHECKOUT_DIR/dircolors.ansi-dark" .dircolors
 
