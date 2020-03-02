@@ -16,3 +16,13 @@ xbindkeys &
 #
 #exec ck-launch-session xmonad
 
+# set xrandr if we detect we're at linuxdojo lab monitor setup
+if [ $(~/.local/bin/monitors_hash) == "ebea32402397374b0e05a967246de9ffae796d6c393fa98a157d38d4843080af" ]; then
+	xrandr \
+		--fb 10240x5040 \
+		--output DP-1-1 --scale 1x1 --mode 2560x1600 --pos 0x0 \
+		--output DP-3 --scale 1x1 --mode 2560x1440 --pos 2560x0 \
+		--output eDP-1 --scale 0.5x0.5 --mode 3840x2160 --pos 2560x1440 \
+		> /dev/null 2>&1
+fi
+

@@ -5,6 +5,10 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+if [ -f ~/.bashrc_local ]; then
+    . ~/.bashrc_local 
+fi
+
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
