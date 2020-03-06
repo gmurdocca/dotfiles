@@ -27,6 +27,7 @@ alias please='sudo'
 alias sorry='sudo $( history -p "!!" )'
 alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash --rcfile <(echo \"source $HOME/.bashrc\")"'
 alias cdc='cd ~/Documents/grive/LinuxDojo/Clients'
+alias cdd='cd ~/Documents/grive'
 
 alias cp-debug='function _cp_debug () { kubectl exec -n ${1:-default} -it $(kubectl get pods -n ${1:-default} -lapp=cp-debug -o name) -- bash ;  } ; _cp_debug'
 
@@ -34,11 +35,17 @@ alias cp-debug='function _cp_debug () { kubectl exec -n ${1:-default} -it $(kube
 export EDITOR=vim
 export PSQL_EDITOR='vim -c "set ft=sql"'
 
+# if we're on high dpi display, scale qt guis correctly, else the look too big
+# Note, the below 3 lines should be manually added to file /etc/profile.d/sh.local (on Fedora) to be applied to the LightDM (desktop's) global environment
+if xrandr --verbose 2>/dev/null | grep -q "scaling mode: Full aspect"; then 
+    export QT_SCALE_FACTOR=1
+fi
+
 # Disable Ctrl-S
 stty stop undef
 
 # PATH changes
-export PATH=$HOME/.local/bin:$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:$PATH:/var/lib/snapd/snap/bin
 
 # Get pretty ls colours
 if [ -z $DIRCOLORS ]; then 
