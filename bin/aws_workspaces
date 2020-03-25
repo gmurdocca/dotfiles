@@ -1,0 +1,45 @@
+#!/bin/bash
+
+OPTIND=1
+option='start'
+
+function usage() {
+   cat <<EOF
+Usage: $0 [option]
+
+options:
+
+    -u    Install or upgrade AWS Workspaces client
+    -h|?  this help
+
+EOF
+   exit 0
+}
+
+while getopts "uh?" opt; do
+    # we only fall in here if an arg was passed in
+    case "$opt" in
+		h|\?) usage;;
+		u) option='update';;
+        *) usage;;
+    esac
+done
+
+if [ "$option" == "start" ]; then
+    out=$(env WINEPREFIX="/home/${USER}/.wine" wine 'C:\Program Files (x86)\Amazon Web Services, Inc\Amazon WorkSpaces\workspaces.exe' 2>&1)
+    echo $out
+    echo $out | grep -q "cannot find" && \
+        echo Perhaps you need to install AWS Workspaces client? \(run: $0 -u\)
+elif [ "$option" == "update" ]; then
+	# kill any running workspaces processes
+	ps aux | grep -P 'workspaces.exe' | grep -v grep | awk '{ print $2 }' | xargs kill -9
+	# wait for a bit
+	sleep 1
+	msi="/tmp/Amazon+WorkSpaces.msi"
+	msi_url=$(curl https://clients.amazonworkspaces.com/ -s | grep 'class="download-button"' | grep -i windows | awk -F'"' '{ print $2 }')
+	curl "$msi_url" -o /tmp/Amazon+WorkSpaces.msi
+	wine64 msiexec /i "$msi" /quiet /qn /norestart /log c:\aws_workpsaces_install.log
+	rm /tmp/Amazon+WorkSpaces.msi
+else
+    usage
+fi

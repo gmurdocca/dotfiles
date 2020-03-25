@@ -1,0 +1,24 @@
+#!/bin/bash
+
+_gprint () {
+  echo -e "\033[1;32m${1}\033[0m"
+}
+
+latest=$(curl -sL https://github.com/kubernetes/helm/releases/latest | awk -F'"' '/https:\/\/.*-linux-amd64.tar.gz/ { print $2 }')
+version=$(echo "$latest" | awk -F- '{ print $(NF -2) }')
+
+tmp_dir=$(uuidgen)
+
+mkdir /tmp/${tmp_dir}
+cd /tmp/${tmp_dir}
+
+curl -LO "$latest"
+
+tar zxvf helm*linux-amd64.tar.gz > /dev/null
+
+sudo mv linux-amd64/helm /usr/local/bin/helm && \
+sudo chmod +x /usr/local/bin/helm && \
+_gprint "Helm has been updated to version ${version}!"
+
+cd /tmp/
+rm -rf $tmp_dir

@@ -73,6 +73,10 @@ done
 # install dein for vim if not installed
 $CHECKOUT_DIR/setup_vim.sh $1
 
+# Turn on no_desktopintegration for Appimages
+mkdir -p ${HOME}/.local/share/appimagekit
+touch ${HOME}/.local/share/appimagekit/no_desktopintegration
+
 echo Done!
 echo ""
 echo You may want to create ~/.gitconfig_global with contents:
