@@ -532,3 +532,6 @@ function! ToggleErrors()
 endfunction
 
 nnoremap <silent> <Leader>e :<C-u>call ToggleErrors()<cr>
+
+" use W for writing as root
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
