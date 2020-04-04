@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 import argparse
+import datetime
 import time
 import sys
 import re
@@ -10,17 +11,29 @@ import os
 attempts = 30
 attempt_interval = 1
 xy_offset = 10
+verbose = False
 
 
 def spawn(command):
     output = subprocess.call(command, shell=True)
 
 
+def logit(*args):
+    if verbose:
+        args = " ".join([str(e) for e in args])
+        msg = f"{datetime.datetime.now().isoformat()} - {args}\n"
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+
+
 def get_window_id(title_regex):
     """
     Returns the X window id of the window whose title matches regex `title_regex`
     """
-    output = subprocess.check_output(["wmctrl", "-l"]).decode("utf-8").splitlines()
+    cmd = "wmctrl -l"
+    logit(cmd)
+    output = subprocess.check_output(cmd.split()).decode("utf-8").splitlines()
+    logit(output)
     for line in output:
         w_id = line.split()[0]
         title = line.split(" ", 3)[3]
@@ -30,29 +43,41 @@ def get_window_id(title_regex):
 
 
 def get_mouse_coords():
-    output = subprocess.check_output(["xdotool", "getmouselocation", "--shell"]).decode("utf-8").splitlines()
+    cmd = "xdotool getmouselocation --shell"
+    logit(cmd)
+    output = subprocess.check_output(cmd.split()).decode("utf-8").splitlines()
+    logit(output)
     x = int(output[0].split("=")[1])
     y = int(output[1].split("=")[1])
     screen = int(output[2].split("=")[1])
+    logit(x, y, screen)
     return (x, y, screen)
 
 
 def move_mouse(x, y, screen):
     cmd = f"xdotool mousemove --screen {screen} {x} {y}"
+    logit(cmd)
     rc = subprocess.call(cmd, shell=True)
+    logit(rc)
 
 
 def get_close_coords(w_id):
-    output = subprocess.check_output(["xdotool", "getwindowgeometry", "--shell", w_id]).decode("utf-8").splitlines()
+    cmd = f"xdotool getwindowgeometry --shell {w_id}"
+    logit(cmd)
+    output = subprocess.check_output(cmd.split()).decode("utf-8").splitlines()
+    logit(output)
     width = int(output[3].split("=")[1]) - xy_offset
     height = xy_offset
+    logit(width, height)
     return (width, height)
 
 
 def click(w_id, width, height):
     x, y, screen = get_mouse_coords()
-    cmd = f"xdotool mousemove --window {w_id} {width} {height} click 1"
+    cmd = f"xdotool windowactivate --sync {w_id} mousemove --sync --window {w_id} {width} {height} click 1"
+    logit(cmd)
     rc = subprocess.call(cmd, shell=True)
+    logit(rc)
     move_mouse(x, y, screen)
 
 
@@ -60,13 +85,14 @@ def parse_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('executable', type=str, help="Executable to run")
     parser.add_argument('title_regex', type=str, help="Regex matching window title")
-    parser.add_argument('sleep', type=int, help="Seconds to wait after running executable before closing window  (default: %(default)s)", default=5)
+    parser.add_argument('sleep', type=int, help="Seconds to wait after running executable before closing window (default: %(default)s)", default=5)
+    parser.add_argument('-v', '--verbose', action='store_true', help="Be verbose, else only errors are shown")
     return parser.parse_args()
-
 
 
 if __name__ == "__main__":
     args = parse_args()
+    verbose = args.verbose
     spawn(args.executable)
     time.sleep(args.sleep)
     window_id = get_window_id(args.title_regex)

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# we need to wait for any xrandr stuff to complete so that the start_closed command can calculate screen geometry correctly
+
+current_time=$(date +"%s")
+# if the last time .xinitrc was ran was > 5 seconds ago and less than 5 seconds have passed since this script started
+while \
+    [ `echo "$(date +'%s')-$(cat ~/.xinitrc_lastupdate)" | bc` -gt 5 ] && \
+    [ `echo "$(date +'%s')-${current_time}" | bc` -lt 5 ]; do
+    sleep .5
+done
+start_closed teams '.*Microsoft Teams.*' 8 -v >/tmp/start_closed.log 2>&1

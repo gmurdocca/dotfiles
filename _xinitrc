@@ -41,3 +41,5 @@ elif [ $(~/.local/bin/monitors_hash) == "9c603045c6cda87214106f8f84483cf99fb7307
 
 fi
 
+date +"%s" > ~/.xinitrc_lastupdate
+
