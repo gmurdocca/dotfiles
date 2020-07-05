@@ -8,6 +8,8 @@ endif
 
 " Create plugins list
 let vim_plugins = [
+	 \'junegunn/fzf',
+	 \'junegunn/fzf.vim',
    \'AndrewRadev/linediff.vim',
    \'Glench/Vim-Jinja2-Syntax',
    \'Lokaltog/vim-easymotion',
@@ -26,7 +28,6 @@ let vim_plugins = [
    \'elzr/vim-json',
    \'ervandew/supertab',
    \'jceb/vim-orgmode',
-   \'jiangmiao/auto-pairs',
    \'kristijanhusak/vim-multiple-cursors',
    \'mileszs/ack.vim',
    \'mxw/vim-jsx',
@@ -52,12 +53,18 @@ let vim_plugins = [
    \'Quramy/tsuquyomi',
    \'Quramy/vim-js-pretty-template',
    \'PProvost/vim-ps1',
+   \'fatih/vim-go',
+   \ 'tpope/vim-sensible',
+   \ 'Vimjas/vim-python-pep8-indent',
+   \ 'ludovicchabant/vim-gutentags',
    \]
 
 " List of pligins that need newer vim
 let newvim_plugins = [
-   \'fatih/vim-go',
    \]
+	" YCM SHOULD COMMENTED OUT FOR NEW INSTALLS !!
+	" Install go binary, `apt-packs` and nodejs BEFORE installing YCM
+	"'ycm-core/YouCompleteMe', { 'do': './install.py --go-completer --ts-completer'} 
 
 if v:version < 800
 

@@ -54,6 +54,12 @@ if [ -z $DIRCOLORS ]; then
 fi
 eval `dircolors ${DIRCOLORS}`
 
+if [ "$SUDO_USER" ]; then
+    export ORIG_HOME=$(getent passwd ${SUDO_USER} home | cut -d: -f6)
+else
+    export ORIG_HOME=$HOME
+fi
+
 # Colors, children! Behold!
 DEFAULT="\[\e[0;0m\]"
 PINK="\[\e[0;35m\]"
@@ -112,6 +118,11 @@ export HISTCONTROL=ignoredups:ignorespace
 
 # When the shell exits, append to the history file instead of overwriting it
 type shopt >/dev/null 2>&1 && shopt -s histappend
+
+# setup fzf keybindings
+#. $HOME/.vim/plugged/fzf/shell/key-bindings.bash
+
+. $ORIG_HOME/.vim/repos/github.com/junegunn/fzf/shell/key-bindings.bash
 
 ## functions for dynamic title renaming 
 #settitle() {  # change the title of the current window
@@ -212,3 +223,5 @@ $(which xmodmap >/dev/null 2>&1) && xmodmap -e "keycode 9 = grave asciitilde" 2>
 if [ -e ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
+
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
