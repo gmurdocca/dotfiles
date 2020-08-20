@@ -29,6 +29,7 @@ alias rootme='sudo /bin/bash -c "DIRCOLORS=${HOME}/.dircolors PATH=${PATH} bash 
 alias cdc='cd ~/Documents/grive/LinuxDojo/Clients'
 alias cdg='cd ~/Documents/grive'
 alias cdd='cd ~/Downloads'
+alias xc='xclip -selection clipboard'
 
 alias cp-debug='function _cp_debug () { kubectl exec -n ${1:-default} -it $(kubectl get pods -n ${1:-default} -lapp=cp-debug -o name) -- bash ;  } ; _cp_debug'
 
