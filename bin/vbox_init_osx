@@ -26,7 +26,7 @@ vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/efi/0/Config/DmiSyste
 vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
 vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
 vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
-vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGraphicsResolution" "1440x900"
-vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGopMode" 4
+vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGraphicsResolution" "1920x1080"
+#vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGopMode" 4
 
 echo Done!
