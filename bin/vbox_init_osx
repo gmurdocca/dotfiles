@@ -2,7 +2,9 @@
 
 target_vm=$1
 
-if [ ! $target_vm ]; then
+echo '===== macOS 10.13 High Sierra VirtualBox Configurator ====='
+
+if [ ! "$target_vm" ]; then
     echo Usage: 
     echo "    $0 '<name_of_vm>'"
     echo "To list VM's, type:"
@@ -10,7 +12,7 @@ if [ ! $target_vm ]; then
     exit
 fi
 
-vboxmanage list vms  | awk '{print $1}' | grep -q $target_vm
+vboxmanage list vms  | awk -F\{ '{print $1}' | grep -q "$target_vm"
 if [ $? -ne 0 ]; then
     echo Error: 
     echo "    Target VM \"$target_vm\" not found."
