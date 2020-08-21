@@ -1,0 +1,32 @@
+#!/bin/bash
+
+target_vm=$1
+
+if [ ! $target_vm ]; then
+    echo Usage: 
+    echo "    $0 '<name_of_vm>'"
+    echo "To list VM's, type:"
+    echo "    vboxmanage list vms"
+    exit
+fi
+
+vboxmanage list vms  | awk '{print $1}' | grep -q $target_vm
+if [ $? -ne 0 ]; then
+    echo Error: 
+    echo "    Target VM \"$target_vm\" not found."
+    echo "To list VM's, type:"
+    echo "    vboxmanage list vms"
+    exit 1
+fi
+
+echo initialising VirtualBox vm: $target_vm
+vboxmanage modifyvm "$target_vm" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
+vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac11,3"
+vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
+vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGraphicsResolution" "1440x900"
+vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGopMode" 4
+
+echo Done!
