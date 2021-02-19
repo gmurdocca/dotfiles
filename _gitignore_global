@@ -98,3 +98,14 @@ fabric.properties
 
 tags.lock
 tags.temp
+
+.idea/
+
+#####################
+# Python
+####################
+
+__pycache__
+
+.env
+venv/

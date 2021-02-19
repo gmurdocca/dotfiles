@@ -30,3 +30,5 @@
 	recurse = true
 [include]
     path = ~/.gitconfig_global
+[pull]
+	rebase = false
