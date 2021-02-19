@@ -1,1 +1,2 @@
 \set ON_ERROR_ROLLBACK interactive
+\setenv PAGER less
