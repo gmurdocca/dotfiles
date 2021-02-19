@@ -31,6 +31,10 @@ vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/smc/0/Config/DeviceKe
 vboxmanage setextradata "$target_vm" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
 vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGraphicsResolution" "1920x1080"
 vboxmanage modifyvm "$target_vm" --vrdeaddress 127.0.0.1
+vboxmanage setextradata "$target_vm" "VBoxInternal/CPUM/IsaExts/AVX" 0
+VBoxManage setextradata "$target_vm" VBoxInternal/CPUM/IsaExts/AVX2 0
+
+
 #vboxmanage setextradata "$target_vm" "VBoxInternal2/EfiGopMode" 4
 
 echo Done!
