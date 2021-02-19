@@ -37,17 +37,13 @@ alias cp-debug='function _cp_debug () { kubectl exec -n ${1:-default} -it $(kube
 export EDITOR=vim
 export PSQL_EDITOR='vim -c "set ft=sql"'
 
-# if we're on high dpi display, scale qt guis correctly, else the look too big
-# Note, the below 3 lines should be manually added to file /etc/profile.d/sh.local (on Fedora) to be applied to the LightDM (desktop's) global environment
-if xrandr --verbose 2>/dev/null | grep -q "scaling mode: Full aspect"; then 
-    export QT_SCALE_FACTOR=1
-fi
+export QT_SCALE_FACTOR=1
 
 # Disable Ctrl-S
 stty stop undef
 
 # PATH changes
-export PATH=$HOME/.local/bin:$HOME/bin:$PATH:/var/lib/snapd/snap/bin
+export PATH=$HOME/.local/bin:$HOME/bin:$PATH:/var/lib/snapd/snap/bin:$HOME/go/bin
 
 # Get pretty ls colours
 if [ -z $DIRCOLORS ]; then 
@@ -110,8 +106,8 @@ bgj_status="\[\033[1;37m\]\`if [ \$(jobs | wc -l | tr -d ' ') -gt 0 ]; then echo
 export PS1="${job_status} ${uhp_status} ${vcs_status}${bgj_status}\n${DEFAULT}${prompt}${DEFAULT} "
 
 # Make ~/.bash_history unbounded in size (from: http://mywiki.wooledge.org/BashFAQ/088)
-unset HISTFILESIZE
-export HISTSIZE=10000
+export HISTFILESIZE=
+export HISTSIZE=
 export PROMPT_COMMAND="history -a"
 
 # Don't write lines starting with a space or repeat entries to the history
@@ -124,6 +120,9 @@ type shopt >/dev/null 2>&1 && shopt -s histappend
 #. $HOME/.vim/plugged/fzf/shell/key-bindings.bash
 
 . $ORIG_HOME/.vim/repos/github.com/junegunn/fzf/shell/key-bindings.bash
+
+# unfsck Drevo Calibur V2 function keys
+lsusb | grep -q 05ac:024f && bash -c 'echo 0 | sudo pkexec tee /sys/module/hid_apple/parameters/fnmode >/dev/null 2>&1'
 
 ## functions for dynamic title renaming 
 #settitle() {  # change the title of the current window
@@ -163,16 +162,26 @@ gac() { # requires TLX package to be installed, sets AWS auth env vars
 }
 
 meep() {
+  domeep() {
+    frequency=${1}
+    duration=${2}
+    ( \speaker-test --frequency ${frequency} --test sine >/dev/null 2>&1)&
+    pid=$!
+    \sleep $(echo ${duration}/1000 | bc -l)s
+    \kill -9 $pid >/dev/null 2>&1
+    \sleep 0.01
+  } >/dev/null 2>&1
   frequency=${1}
   duration=${2}
-  if [ -z "${frequency}" ]; then frequency=1000; fi
-  if [ -z "${duration}" ]; then duration=300; fi
-  ( \speaker-test --frequency ${frequency} --test sine >/dev/null 2>&1)&
-  pid=$!
-  \sleep 0.${duration}s
-  \kill -9 $pid >/dev/null
-  \sleep 0.01
-} >/dev/null 2>&1
+  if [ "${frequency}" == "-h" ] || [ "${frequency}" == "--help" ]; then
+    echo Usage:
+    echo "meep [frequency (default: 1000)] [duration (default: 300)]"
+  else
+    if [ -z "${frequency}" ]; then frequency=1000; fi
+    if [ -z "${duration}" ]; then duration=300; fi
+    domeep ${frequency} ${duration}
+  fi
+}
 
 # start powerline-daemon if it is in $PATH and not already running
 if hash powerline-daemon 2>/dev/null; then
