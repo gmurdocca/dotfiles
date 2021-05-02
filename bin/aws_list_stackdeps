@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+"""
+Outputs a JSON object listing every stack, its outputs, and which stacks use them in the following format:
+
+    {
+        "stack_name": [
+            "output_name": [
+                "stack_that_uses_this_output",
+                ...
+                ]
+            ],
+            ...,
+        ...,
+    }
+"""
+
+from collections import defaultdict
+import botocore
+import boto3
+import json
+import sys
+
+
+def get_exports(cfn):
+    all_exports = []
+    kwargs = {}
+    while True:
+        exports = cfn.list_exports(**kwargs)
+        all_exports += exports["Exports"]
+        if "NextToken" in exports:
+            kwargs = {"NextToken": exports["NextToken"]}
+        else:
+            break
+    return all_exports
+
+
+def list_stack_deps(cfn, export_name):
+    dep_stacks = []
+    kwargs = {}
+    while True:
+        try:
+            dep_stacks += cfn.list_imports(ExportName=export_name, **kwargs)["Imports"]
+        except botocore.exceptions.ClientError:
+            break
+        if "NextToken" in dep_stacks:
+            kwargs = {"NextToken": exports["NextToken"]}
+        else:
+            break
+    return dep_stacks
+
+
+if __name__ == "__main__":
+    cfn = boto3.client('cloudformation')
+    result = defaultdict(list)
+    sys.stderr.write("Fetching stacks, outputs and deps")
+    sys.stderr.flush()
+    for export in get_exports(cfn):
+        sys.stderr.write(".")
+        sys.stderr.flush()
+        stack_name = export["ExportingStackId"].split("/")[1]
+        export_name = export["Name"]
+        deps = list_stack_deps(cfn, export_name)
+        result[stack_name].append({export_name: deps})
+    sys.stderr.write("\n")
+    sys.stderr.flush()
+    result = dict(result)
+    print(json.dumps(result, indent=2))
